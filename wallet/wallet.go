@@ -33,7 +33,7 @@ func init() {
 		panic(err)
 	}
 
-	for i := 0; i < 200; i++ {
+	for i := 0; i < config.NF; i++ {
 		rawPath := fmt.Sprintf("m/44'/60'/0'/0/%d", i)
 		path := hdwallet.MustParseDerivationPath(rawPath)
 		account, err := WMiner.Derive(path, true)
@@ -51,7 +51,7 @@ func init() {
 	}
 	log.Printf("Number of usable miner address: %d", len(adMiner))
 
-	for i := 0; i < 800; i++ {
+	for i := 0; i < config.NT; i++ {
 		rawPath := fmt.Sprintf("m/44'/60'/0'/0/%d", i)
 		path := hdwallet.MustParseDerivationPath(rawPath)
 		account, err := WNew.Derive(path, true)

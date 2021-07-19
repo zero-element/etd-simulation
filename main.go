@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"etd-transaction/config"
 	"etd-transaction/mock"
 	"fmt"
 	"github.com/robfig/cron/v3"
@@ -19,7 +20,7 @@ var (
 )
 
 func getDay() int64 {
-	delta := time.Now().Sub(time.Date(2021, 7, 19, 0, 0, 0, 0, time.Local))
+	delta := time.Now().Sub(config.StartTime)
 	day := int64(delta.Hours() / 24)
 	return day
 }
