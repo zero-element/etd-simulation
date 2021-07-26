@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"math/big"
 )
 
@@ -22,7 +22,7 @@ func init() {
 		log.Fatal(err.Error())
 	}
 	ChainID, err = c.ChainID(context.Background())
-	log.Printf("ID: %d", ChainID)
+	log.Infof("ID: %d", ChainID)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

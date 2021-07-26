@@ -6,7 +6,7 @@ import (
 	"etd-transaction/mock"
 	"fmt"
 	"github.com/robfig/cron/v3"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"os"
 	"os/signal"
 	"sync"
@@ -42,12 +42,12 @@ func start() {
 		select {
 		case <-ticker.C:
 			if getDay() != tsk.Day {
-				log.Printf("[day %d] ETD: %v\nTransaction: %v", tsk.Day, tsk.ETD, tsk.Trans)
+				log.Infof("[day %d] ETD: %v\nTransaction: %v", tsk.Day, tsk.ETD, tsk.Trans)
 				return
 			}
 			go tsk.Run()
 		case <-ex:
-			log.Printf("[day %d] ETD: %v\nTransaction: %v", tsk.Day, tsk.ETD, tsk.Trans)
+			log.Infof("[day %d] ETD: %v\nTransaction: %v", tsk.Day, tsk.ETD, tsk.Trans)
 			return
 		}
 	}
@@ -87,6 +87,7 @@ func main() {
 		case syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT:
 			ex <- true
 			wg.Wait()
+			buf.Flush()
 			return
 		default:
 			fmt.Println("other signal", s)

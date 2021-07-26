@@ -5,7 +5,7 @@ import (
 	"etd-transaction/wallet"
 	"github.com/ethereum/go-ethereum/accounts"
 	hdwallet "github.com/miguelmota/go-ethereum-hdwallet"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"math"
 	"math/big"
 	"math/rand"
@@ -61,7 +61,7 @@ func (t *Task) Run() {
 		times = int(math.Round(float64(t.rTrans[hour]) / float64(rAct)))
 		s = GetETDScatter(t.rETD[hour] / float64(t.rTrans[hour]))
 	}()
-	log.Printf("[%d] times: %d, ract: %d, expect: %f\nretd: %f, rtrans: %d",
+	log.Infof("[%d] times: %d, ract: %d, expect: %f\nretd: %f, rtrans: %d",
 		hour, times, rAct, t.rETD[hour]/float64(t.rTrans[hour]), t.rETD[hour], t.rTrans[hour])
 
 	rChannel := make(chan float64, times)
@@ -97,7 +97,7 @@ func (t *Task) Run() {
 				from = wallet.GetAccountNew(indF)
 				balance, err = rpc.BalanceAt(from)
 				if err != nil {
-					log.Print(err.Error(), from)
+					log.Error(err.Error(), from)
 					return
 				}
 			}
@@ -132,8 +132,8 @@ func (t *Task) Run() {
 	t.rETD[hour] -= sum
 	t.Trans[hour] += int64(count)
 	t.ETD[hour] += sum
-	log.Printf("suc times: %d", count)
-	log.Printf("sum: %f", sum)
+	log.Infof("suc times: %d", count)
+	log.Infof("sum: %f", sum)
 
 	if hour == 23 {
 		return
