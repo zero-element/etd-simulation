@@ -31,7 +31,7 @@ func init() {
 func BalanceAt(account accounts.Account) (*big.Int, error) {
 	res, err := c.BalanceAt(context.Background(), account.Address, nil)
 	if err != nil {
-		log.Print(err.Error(), account)
+		log.Error(err.Error(), account)
 		return nil, err
 	}
 	return res, nil

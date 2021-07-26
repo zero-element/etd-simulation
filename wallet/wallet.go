@@ -112,7 +112,7 @@ func SendTransaction(etd float64, w *hdwallet.Wallet, from, to accounts.Account,
 	log.Infof("etd: %f\nfrom: %v\nto: %v\nflag: %v\nnonce: %d", etd, from, to, flag, nonce)
 	err = rpc.SendTransaction(tx)
 	if err != nil {
-		log.Error(err.Error())
+		log.Error(err.Error(), etd, from, to)
 		return err
 	}
 	return nil
