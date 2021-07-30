@@ -64,7 +64,7 @@ func (t *Task) Run() {
 	log.Infof("[%d] times: %d, ract: %d, expect: %f\nretd: %f, rtrans: %d",
 		hour, times, rAct, t.rETD[hour]/float64(t.rTrans[hour]), t.rETD[hour], t.rTrans[hour])
 
-	rChannel := make(chan float64, times)
+	sc := make(chan float64, times)
 	var wg sync.WaitGroup
 
 	for i := 0; i < times; i++ {
@@ -107,25 +107,26 @@ func (t *Task) Run() {
 				from = wallet.GetAccountMiner(index)
 			}
 
-			if wallet.SendTransaction(etd, w, from, to, t.price) != nil {
-				rChannel <- 0
+			if err = wallet.SendTransaction(etd, w, from, to, t.price); err != nil {
+				log.Error(err.Error())
 			} else {
-				rChannel <- etd
+				sc <- etd
 			}
 		}()
 	}
 	wg.Wait()
+	close(sc)
 
 	t.mu.Lock()
 	defer t.mu.Unlock()
-	count := times
+	count := 0
 	sum := 0.
-	for i := 0; i < times; i++ {
-		if res, ok := <-rChannel; ok {
-			if res == 0 {
-				count -= 1
-			}
+	for {
+		if res, ok := <-sc; ok {
+			count += 1
 			sum += res
+		} else {
+			break
 		}
 	}
 	t.rTrans[hour] -= int64(count)
