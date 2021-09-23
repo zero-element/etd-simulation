@@ -2,11 +2,11 @@ package rpc
 
 import (
 	"context"
-	"etd-transaction/config"
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethclient"
 	log "github.com/sirupsen/logrus"
+	"github.com/zero-element/etd-transaction/config"
+	"github.com/zero-element/go-etdereum/accounts"
+	"github.com/zero-element/go-etdereum/core/types"
+	"github.com/zero-element/go-etdereum/ethclient"
 	"math/big"
 )
 

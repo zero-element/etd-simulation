@@ -1,10 +1,10 @@
 package wallet
 
 import (
-	"etd-transaction/config"
-	"etd-transaction/rpc"
 	"fmt"
-	"github.com/miguelmota/go-ethereum-hdwallet"
+	"github.com/zero-element/etd-transaction/config"
+	"github.com/zero-element/etd-transaction/rpc"
+	"github.com/zero-element/go-etdereum-hdwallet"
 	"log"
 	"testing"
 )

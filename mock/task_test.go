@@ -1,9 +1,9 @@
 package mock
 
 import (
-	"etd-transaction/rpc"
-	"etd-transaction/wallet"
-	"github.com/ethereum/go-ethereum/accounts"
+	"github.com/zero-element/etd-transaction/rpc"
+	"github.com/zero-element/etd-transaction/wallet"
+	"github.com/zero-element/go-etdereum/accounts"
 	"log"
 	"math"
 	"math/big"

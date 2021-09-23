@@ -2,11 +2,11 @@ package main
 
 import (
 	"bufio"
-	"etd-transaction/config"
-	"etd-transaction/mock"
 	"fmt"
 	"github.com/robfig/cron/v3"
 	log "github.com/sirupsen/logrus"
+	"github.com/zero-element/etd-transaction/config"
+	"github.com/zero-element/etd-transaction/mock"
 	"os"
 	"os/signal"
 	"sync"

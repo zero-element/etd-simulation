@@ -1,13 +1,13 @@
 package wallet
 
 import (
-	"etd-transaction/config"
-	"etd-transaction/rpc"
 	"fmt"
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/core/types"
-	hdwallet "github.com/miguelmota/go-ethereum-hdwallet"
 	log "github.com/sirupsen/logrus"
+	"github.com/zero-element/etd-transaction/config"
+	"github.com/zero-element/etd-transaction/rpc"
+	hdwallet "github.com/zero-element/go-etdereum-hdwallet"
+	"github.com/zero-element/go-etdereum/accounts"
+	"github.com/zero-element/go-etdereum/core/types"
 	"math/big"
 )
 
@@ -104,7 +104,7 @@ func SendTransaction(etd float64, w *hdwallet.Wallet, from, to accounts.Account,
 		Value:    value,
 		Data:     data,
 	})
-	tx, err = w.SignTxEIP155(from, tx, rpc.ChainID, nil)
+	tx, err = w.SignTxEIP155(from, tx, rpc.ChainID)
 	if err != nil {
 		log.Error(err.Error(), from)
 		return err

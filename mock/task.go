@@ -1,11 +1,11 @@
 package mock
 
 import (
-	"etd-transaction/rpc"
-	"etd-transaction/wallet"
-	"github.com/ethereum/go-ethereum/accounts"
-	hdwallet "github.com/miguelmota/go-ethereum-hdwallet"
 	log "github.com/sirupsen/logrus"
+	"github.com/zero-element/etd-transaction/rpc"
+	"github.com/zero-element/etd-transaction/wallet"
+	hdwallet "github.com/zero-element/go-etdereum-hdwallet"
+	"github.com/zero-element/go-etdereum/accounts"
 	"math"
 	"math/big"
 	"math/rand"
